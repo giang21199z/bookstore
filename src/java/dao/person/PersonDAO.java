@@ -52,6 +52,5 @@ public class PersonDAO {
         } catch (SQLException ex) {
             Logger.getLogger(PersonDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }

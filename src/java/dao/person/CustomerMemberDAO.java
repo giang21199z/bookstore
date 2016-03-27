@@ -42,7 +42,7 @@ public class CustomerMemberDAO {
         con = cdb.getConnect(dbUsername, dbPassword);
     }
 
-    public void register(CustomerMember customerMember) {
+    public void register(CustomerMember customerMember) throws SQLException {
         String sql = "INSERT INTO customer_member(idperson,username,password,idbank) VALUES (?,?,?,?)";
         CustomerDAO cdao = new CustomerDAO(dbUsername, dbPassword);
         Customer c = (Customer) customerMember;
@@ -51,16 +51,12 @@ public class CustomerMemberDAO {
         System.out.println(kb.getIdbank() + kb.getBalance() + kb.getPart());
         KcoinBankDAO kbDao = new KcoinBankDAO();
         kbDao.addKcoinBank(kb);
-        try {
-            PreparedStatement ps = con.prepareCall(sql);
-            ps.setInt(1, customerMember.getIdperson());
-            ps.setString(2, customerMember.getUsername());
-            ps.setString(3, customerMember.getPassword());
-            ps.setInt(4, kb.getIdbank());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerMemberDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        PreparedStatement ps = con.prepareCall(sql);
+        ps.setInt(1, customerMember.getIdperson());
+        ps.setString(2, customerMember.getUsername());
+        ps.setString(3, customerMember.getPassword());
+        ps.setInt(4, kb.getIdbank());
+        ps.executeUpdate();
     }
 
     public boolean login(CustomerMember customer) {

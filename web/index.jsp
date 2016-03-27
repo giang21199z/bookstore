@@ -121,10 +121,3 @@
         </div> <!-- end of container -->
     </body>
 </html>
-<% boolean orderSuccess = (boolean) request.getAttribute("ORDERSUCESS");
-    if (orderSuccess) {
-%>
-<script>
-    alert("Bạn vừa đặt hàng thành công.\nĐơn hàng của bạn đang được xử lý.");
-</script>
-<%}%>

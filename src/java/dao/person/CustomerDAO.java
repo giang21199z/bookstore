@@ -23,6 +23,10 @@ public class CustomerDAO {
     private Connection con = null;
     String dbUsername = "root";
     String dbPassword = "";
+
+    public Connection getCon() {
+        return con;
+    }
     
     public CustomerDAO() {
         

@@ -5,6 +5,7 @@
  */
 package servlet.person;
 
+import adapter.person.CustomerMemberAdapter;
 import dao.person.CustomerMemberDAO;
 import dao.person.GetId;
 import entity.bank.KcoinBank;
@@ -113,9 +114,14 @@ public class Register extends HttpServlet {
         cm.setEmail(email);
         cm.setCoinBank(kcoinBank);
         cm.setPart("CustomerMember");
-        CustomerMemberDAO cmd = new CustomerMemberDAO("root", "");
-        cmd.register(cm);
-        response.sendRedirect("index.jsp");
+        CustomerMemberAdapter customerMemberAdapter = new CustomerMemberAdapter();
+        if (customerMemberAdapter.register(cm)) {
+            response.sendRedirect("index.jsp");
+        } else {
+            response.sendRedirect("error.jsp");
+        }
+        //CustomerMemberDAO cmd = new CustomerMemberDAO("root", "");
+//        cmd.register(cm);
     }
 
     /**

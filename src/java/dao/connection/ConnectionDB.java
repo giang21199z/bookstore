@@ -30,5 +30,4 @@ public class ConnectionDB {
     public Connection getConnect(String dbusername, String dbpassword) {
         return con;
     }
-    
 }
