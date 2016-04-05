@@ -5,6 +5,7 @@
  */
 package entity.orders;
 
+import dao.orders.Context;
 import entity.shipping.ShippingInfor;
 import java.sql.Date;
 
@@ -18,6 +19,7 @@ public class Order {
     private Payment payment;
     private ShippingInfor shippingInfor;
     private Date date;
+    private Context context;
 
     public Order(int id, Payment payment, ShippingInfor shippingInfor, Date date) {
         this.id = id;
@@ -65,6 +67,14 @@ public class Order {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
 }

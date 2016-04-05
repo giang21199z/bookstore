@@ -42,6 +42,21 @@ public class Book {
     public Book() {
     }
 
+    private Book(BookBuild builder) {
+        this.id = builder.id;
+        this.image = builder.image;
+        this.title = builder.title;
+        this.author = builder.author;
+        this.publisher = builder.publisher;
+        this.publishYear = builder.publishYear;
+        this.description = builder.description;
+        this.originalPrice = builder.originalPrice;
+        this.salePrice = builder.salePrice;
+        this.quantity = builder.quantity;
+        this.category = builder.category;
+        this.bookSet = builder.bookSet;
+    }
+
     public int getId() {
         return id;
     }
@@ -136,6 +151,41 @@ public class Book {
 
     public void setBookSet(BookSet bookSet) {
         this.bookSet = bookSet;
+    }
+
+    public static class BookBuild {
+
+        private int id;
+        private String image;
+        private String title;
+        private String author;
+        private String publisher;
+        private String publishYear;
+        private String description;
+        private float originalPrice;
+        private float salePrice;
+        private int quantity;
+        private Category category;
+        private BookSet bookSet;
+
+        public BookBuild(int id, String image, String title, String author, String publisher, String publishYear, String description, float originalPrice, float salePrice, int quantity, Category category, BookSet bookSet) {
+            this.id = id;
+            this.image = image;
+            this.title = title;
+            this.author = author;
+            this.publisher = publisher;
+            this.publishYear = publishYear;
+            this.description = description;
+            this.originalPrice = originalPrice;
+            this.salePrice = salePrice;
+            this.quantity = quantity;
+            this.category = category;
+            this.bookSet = bookSet;
+        }
+
+        public Book build() {
+            return new Book(this);
+        }
     }
 
 }

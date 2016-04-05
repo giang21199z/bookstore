@@ -34,15 +34,16 @@ public class OrdersDAO {
         con = cdb.getConnect(dbUsername, dbPassword);
     }
 
-    public void addOrder(Order orders) {
-        String sqlPerson = "INSERT INTO orders  VALUES (?,?,?,?);";
+    public void addOrder(Order orders, Context context) {
+        String sqlPerson = "INSERT INTO orders  VALUES (?,?,?,?,?);";
         try {
             PreparedStatement ps = con.prepareStatement(sqlPerson);
             ps.setInt(1, orders.getId());
             ps.setDate(2, orders.getDate());
             ps.setInt(3, orders.getPayment().getId());
             ps.setInt(4, orders.getShippingInfor().getId());
-            System.out.println("Truy vấn INSERT ORDER:"+ps.toString());
+            ps.setString(5, context.getOrderState().toString());
+            System.out.println("Truy vấn INSERT ORDER:" + ps.toString());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(OrdersDAO.class.getName()).log(Level.SEVERE, null, ex);

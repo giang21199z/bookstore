@@ -7,8 +7,10 @@ package dao.book;
 
 import dao.connection.ConnectionDB;
 import entity.book.Book;
+import entity.book.BookDirector;
 import entity.book.BookSet;
 import entity.book.Category;
+import entity.book.USBookBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,7 +68,10 @@ public class BookDAO {
                 String bsdescription = rs.getString("bsdescription");
                 Category category = new Category(idcategory, type, area, cdescription);
                 BookSet bookset = new BookSet(idbookSet, bsdescription);
-                Book book = new Book(id, image, title, author, publisher, publishYear, description, originalPrice, salePrice, quantity, category, bookset);
+                BookDirector bd = new BookDirector();
+                USBookBuilder ussb = new USBookBuilder();
+                bd.contructor(ussb, id, image, title, author, publisher, publishYear, description, originalPrice, salePrice, quantity, category, bookset);
+                Book book = ussb.getBook();
                 arr.add(book);
             }
         } catch (SQLException ex) {

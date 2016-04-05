@@ -5,7 +5,9 @@
  */
 package servlet.orders;
 
+import dao.orders.Context;
 import dao.orders.OrdersDAO;
+import dao.orders.UnconfimredOrder;
 import dao.person.CustomerDAO;
 import dao.person.CustomerMemberDAO;
 import dao.person.GetId;
@@ -160,7 +162,10 @@ public class Order extends HttpServlet {
         orders.setPayment(payment);
         orders.setShippingInfor(shippingInfor);
         OrdersDAO ordersDAO = new OrdersDAO();
-        ordersDAO.addOrder(orders);
+        Context context = new Context();
+        UnconfimredOrder unconfimredOrder = new UnconfimredOrder();
+        unconfimredOrder.doAction(context);
+        ordersDAO.addOrder(orders, context);
 
         //Xoa session
         session.removeAttribute("PAYMENT");
